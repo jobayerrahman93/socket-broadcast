@@ -7,19 +7,35 @@ const io = new Server(server);
 
 
 
-io.on('connection', (socket) => {
-    console.log('a user connected');
 
+let sellNmsp= io.of("/sell");
 
-    // broad cast
-
-    io.sockets.emit('myBroadcast','you are listening your favorite broadcast guys')
-
-
-    socket.on('disconnect', () => {
-        console.log('user disconnected');
-    });
+sellNmsp.on('connection',(socket)=>{
+    sellNmsp.emit('separateEvent','This is a sell page');
 });
+
+let buyNmsp= io.of("/buy");
+buyNmsp.on('connection',(socket)=>{
+    buyNmsp.emit('separateEvent','This is a buy page');
+})
+
+
+
+
+//     broadcast for specific user
+// io.on('connection', (socket) => {
+//     console.log('a user connected');
+
+
+//     broad cast for every user
+//     io.sockets.imit used for broadcast
+
+//     io.sockets.emit('myBroadcast','you are listening your favorite broadcast guys');
+
+//     socket.on('disconnect', () => {
+//         console.log('user disconnected');
+//     });
+// });
 
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');

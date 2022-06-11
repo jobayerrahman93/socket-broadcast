@@ -8,16 +8,26 @@
 </head>
 <body>
     <h1 id="broadcast"></h1>
-
     <script src="/socket.io/socket.io.js"></script>
-<script>
-  var socket = io();
 
-  
-  socket.on('myBroadcast',(data)=>{
+
+<script>
+
+
+//   var socket = io();
+//   socket.on('myBroadcast',(data)=>{
+//       document.getElementById("broadcast").innerHTML=data;
+
+//   })
+
+
+var socket = io('/buy');
+
+  socket.on('separateEvent',(data)=>{
       document.getElementById("broadcast").innerHTML=data;
 
   })
+
 
 
 
